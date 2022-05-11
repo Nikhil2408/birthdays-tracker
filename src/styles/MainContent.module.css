@@ -1,0 +1,12 @@
+.MainContent{
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 1000px;
+    width: 100%;
+}
+
+@media(max-width: 900px){
+    .MainContent{
+        flex-direction: column;
+    }
+}
