@@ -5,6 +5,7 @@ import { collection, getDocs } from 'firebase/firestore/lite';
 import {v4 as uuidv4} from "uuid";
 import styles from "../../../styles/BirthdayListContainer.module.css";
 import BirthdayList from "./BirthdayList";
+import party from "../../../assets/party.png";
 
 
 function BirthdayListContainer(props){
@@ -35,7 +36,7 @@ function BirthdayListContainer(props){
     return (
         <div className={styles.BirthdayListContainer}>
             <h2>Upcoming Birthdays</h2>
-            <p>Here are your loved ones whose birthday is this month!</p>
+            <p>Here are your loved ones whose birthday is this month! <img src={party} /></p>
             {
                 filteredFriendsList.length !== 0 
                 ?

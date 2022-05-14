@@ -1,5 +1,5 @@
 .Header{
-    margin: 3rem 1rem 2rem 1rem;
+    margin: 1.5rem 1rem 2rem 1rem;
     color: white;
     display: flex;
     flex-direction: column;
@@ -11,6 +11,8 @@
 }
 
 .Header > p{
+    font-family: 'Dancing Script', cursive;
     margin: 0rem 0.5rem;
     text-align: center;
+    font-size: 2rem;
 }
