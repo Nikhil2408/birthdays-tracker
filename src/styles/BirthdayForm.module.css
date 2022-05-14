@@ -1,6 +1,6 @@
 .BirthdayForm{
     background-color: white;
-    padding: 2rem 1rem;
+    padding: 2rem 1rem 1rem 1rem;
     border-radius: 10px;
     width: 350px;
     display: flex;
@@ -23,6 +23,8 @@
     border: 1px solid red;
 }
 
+/* Button styling when form is valid */
+
 .BirthdayForm > button{
     margin: 1.5rem 2rem 0rem 2rem;
     padding: 1rem 2rem;
@@ -38,6 +40,19 @@
     background-color: rgb(126, 31, 31);
 }
 
+
+/* Button styling when form is invalid */
+
 .BirthdayForm > button.invalid{
     cursor: not-allowed;
+}
+
+.BirthdayForm > button.invalid:hover{
+    background-color: brown;
+}
+
+
+.loadingContainer{
+    margin: 0.8rem auto;
+    font-weight: bold;
 }

@@ -11,6 +11,7 @@ import party from "../../../assets/party.png";
 function BirthdayListContainer(props){
 
     const [fetchedFriendsList, setFetchedFriendsList] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         getFriendsList();
@@ -18,9 +19,11 @@ function BirthdayListContainer(props){
 
 
     async function getFriendsList(){
+        setIsLoading(true);
         const friendsCollection = collection(db, 'friends');
         const friendsSnapshot = await getDocs(friendsCollection);
         setFetchedFriendsList(friendsSnapshot.docs.map(doc => doc.data()));
+        setIsLoading(false);
     }
 
     const friendsList = fetchedFriendsList.map(fetchedFriend => {
@@ -29,17 +32,17 @@ function BirthdayListContainer(props){
 
     const currentMonth = new Date().toLocaleString("en-us", {month: "long"});
 
-    const filteredFriendsList = friendsList.filter((friend) => {
+    let filteredFriendsList = friendsList.filter((friend) => {
         return friend.bdate.toLocaleString("en-us", {month: "long"}) === currentMonth;
     });
+
 
     return (
         <div className={styles.BirthdayListContainer}>
             <h2>Upcoming Birthdays</h2>
             <p>Here are your loved ones whose birthday is this month! <img src={party} /></p>
-            {
-                filteredFriendsList.length !== 0 
-                ?
+            {!isLoading && filteredFriendsList.length === 0 && <div className={styles.noBirthdays}>No Birthdays this month</div>}
+            {!isLoading && filteredFriendsList.length > 0 &&
                 <div>
                     {
                         filteredFriendsList.map(friend => {
@@ -47,9 +50,8 @@ function BirthdayListContainer(props){
                         })
                     }
                 </div>
-                :
-                <div className={styles.noBirthdays}>No Birthdays this month</div>
             }
+            {isLoading && <p>Loading Data...</p>}
         </div>
     )
 }

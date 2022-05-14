@@ -14,6 +14,8 @@ function BirthdayForm(props){
     const [nameInputValid, setNameInputValid] = useState(false);
     const [dateInputValid, setDateInputValid] = useState(false);
     const [formValid, setFormValid] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmittingDisplay, setIsSubmittingDisplay] = useState(false);
 
     useEffect(() => {
         setFormValid(nameInputValid && dateInputValid)
@@ -52,7 +54,7 @@ function BirthdayForm(props){
 
     async function submitHandler(eventObj){
         eventObj.preventDefault();
-
+        setIsSubmitting(true);
         try {
             await addDoc(collection(db, "friends"), {
               name: formInput.name,
@@ -62,7 +64,8 @@ function BirthdayForm(props){
         catch (e) {
             console.error("Error while adding the document: ", e);
         }
-
+        setIsSubmitting(false);
+        setIsSubmittingDisplay(true);
         props.updateCount();
         setFormInput({
             name: "",
@@ -96,8 +99,12 @@ function BirthdayForm(props){
                 formValid ?
                 <button>Add Birthday</button>
                 :
-                <button className = {formValid ? "" : styles.invalid} disabled>Add Birthday</button>
+                <button className = {styles.invalid} disabled>Add Birthday</button>
             }
+            <div class={styles.loadingContainer}>
+                {isSubmitting && <p>Adding Friend...</p>}
+                {!isSubmitting && isSubmittingDisplay && <p>Added Friend Successfully!!</p>}
+            </div>
         </form>
     )
 }
