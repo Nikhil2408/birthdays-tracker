@@ -40,7 +40,7 @@ function BirthdayListContainer(props){
     return (
         <div className={styles.BirthdayListContainer}>
             <h2>Upcoming Birthdays</h2>
-            <p>Here are your loved ones whose birthday is this month! <img alt="party-emoji" src={party} /></p>
+            <p>Here are my loved ones whose birthday is this month! <img alt="party-emoji" src={party} /></p>
             {!isLoading && filteredFriendsList.length === 0 && <div className={styles.noBirthdays}>No Birthdays this month</div>}
             {!isLoading && filteredFriendsList.length > 0 &&
                 <div>
